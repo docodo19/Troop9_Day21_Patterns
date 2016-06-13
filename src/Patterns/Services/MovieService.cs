@@ -35,7 +35,16 @@ namespace Patterns.Services
 
         public void SaveMovie(Movie movie)
         {
-            _repo.Add(movie);
+            if(movie.Id == 0)
+            {
+                _repo.Add(movie);
+            }
+            else
+            {
+                var movieToEdit = _repo.Query<Movie>().FirstOrDefault(m => m.Id ==  movie.Id);
+                movieToEdit.Title = movie.Title;
+                _repo.SaveChanges();
+            }
         }
 
         public void DeleteMovie(int id)
