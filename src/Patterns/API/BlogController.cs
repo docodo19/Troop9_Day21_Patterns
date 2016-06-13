@@ -23,6 +23,8 @@ namespace Patterns.API
         [HttpGet]
         public IActionResult Get()
         {
+            var eventDate = new DateTime(2016, 6, 14, 13, 30, 0);
+
             var blogs = _repo.GetBlogs();
             return Ok(blogs);
         }

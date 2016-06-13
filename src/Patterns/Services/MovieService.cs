@@ -1,5 +1,6 @@
 ﻿using Patterns.Models;
 using Patterns.Repositories;
+using Patterns.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,17 @@ namespace Patterns.Services
         {
             var movies = _repo.Query<Movie>().ToList();
             return movies;
+        }
+
+        public MovieVM GetMovie(int id)
+        {
+            var movie = _repo.Query<Movie>().Select(m => new MovieVM
+            {
+                Id = m.Id,
+                Title = m.Title
+            }).FirstOrDefault();
+
+            return movie;
         }
 
         public void SaveMovie(Movie movie)
